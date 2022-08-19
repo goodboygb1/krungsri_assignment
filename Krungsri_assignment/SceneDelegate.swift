@@ -54,7 +54,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         coordinator = MainCoordinator(navigationController: navController, window: window!)
         
-        let coordinatorInput = MainCoordinatorInput()
+        let jsonDecoderHelper = JsonDecoderHelper()
+        let alamofire = RxAlamofire()
+        let weatherRepository = WeatherDataRepository(alamofire: alamofire)
+        
+        let coordinatorInput = MainCoordinatorInput(jsonDecoderHelper: jsonDecoderHelper, weatherRepository: weatherRepository)
         coordinator?.start(input: coordinatorInput)
         
         window?.rootViewController = navController

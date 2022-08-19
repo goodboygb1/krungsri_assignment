@@ -9,16 +9,18 @@ import UIKit
 import Foundation
 
 class MainCoordinatorInput: CoordinatorInput {
+    let jsonDecoderHelper: JsonDecoderProtocol
+    let weatherRepository: WeatherRepository
     
-    init() {
-    
+    init(jsonDecoderHelper: JsonDecoderProtocol, weatherRepository: WeatherRepository) {
+        self.jsonDecoderHelper = jsonDecoderHelper
+        self.weatherRepository = weatherRepository
     }
 }
 
 class MainCoordinator: BaseCoordinator {
     
     var navigationController: UINavigationController
-    
     var window: UIWindow
     
     required init(navigationController: UINavigationController, window: UIWindow) {
@@ -27,8 +29,12 @@ class MainCoordinator: BaseCoordinator {
     }
     
     func start(input: CoordinatorInput? = nil) {
-        if let input = input {
+        if let input = input as? MainCoordinatorInput {
             let viewController = MainViewController.initFromStoryboard(name: Constant.StoryboardName.main, bundle: Bundle.main)
+            
+            let viewModel = MainViewModel(input: input)
+            
+            viewController.viewModel = viewModel
             
             navigationController.pushViewController(viewController, animated: false)
         }

@@ -11,4 +11,7 @@ struct Constant {
     struct StoryboardName {
         static let main = "Main"
     }
+    
+    static let endPointUrl = "https://api.openweathermap.org"
+    static let apiKey = "39b7ca4ed12b7cad04e9939e31a7ed2a"
 }

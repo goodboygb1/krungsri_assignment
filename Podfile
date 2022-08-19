@@ -9,4 +9,6 @@ target 'Krungsri_assignment' do
   pod 'Kingfisher', '~> 7.0'
   pod 'IQKeyboardManagerSwift'
   pod 'RxSwift'
+  pod 'RxRelay'
+  pod 'RxCocoa'
 end
