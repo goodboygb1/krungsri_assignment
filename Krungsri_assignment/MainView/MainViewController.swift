@@ -34,12 +34,16 @@ class MainViewController: BaseViewController {
     
     func bindAction() {
         guard let viewModel = viewModel else { return }
-        cityNameTextField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { [weak self] in
+        cityNameTextField.rx.controlEvent(.editingDidEndOnExit)
+            .subscribe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
             guard let self = self else { return }
             viewModel.cityName.onNext((self.cityNameTextField.text ?? "", .metric))
         }).disposed(by: disposeBag)
         
-        convertTempToCAndFButton.rx.tap.subscribe(onNext: { [weak self] in
+        convertTempToCAndFButton.rx.tap
+            .subscribe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
             guard let self = self else { return }
             
             if viewModel.isTempShowInCelsuis {
