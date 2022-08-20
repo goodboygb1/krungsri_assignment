@@ -20,7 +20,7 @@ protocol WeatherRepository {
 
 class WeatherDataRepository: WeatherRepository {
     
-    var alamofire: Alamofire
+    private var alamofire: Alamofire
     
     init(alamofire: Alamofire) {
         self.alamofire = alamofire

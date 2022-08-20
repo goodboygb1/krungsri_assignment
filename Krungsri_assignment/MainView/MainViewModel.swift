@@ -10,17 +10,20 @@ import RxSwift
 import RxCocoa
 import RxRelay
 import SwiftyJSON
+import CoreLocation
 
 class MainViewModel: BaseViewModel {
     
-    var weatherRepository: WeatherRepository
-    var jsonDecoder: JsonDecoderProtocol
+    let weatherRepository: WeatherRepository
+    let jsonDecoder: JsonDecoderProtocol
     
     // input
     let cityName: PublishSubject<(String,Units)> = PublishSubject<(String,Units)>()
+    
     // output
     var temperature: Driver<Double>?
     var huminity: Driver<Int>?
+    var backgroundColour: Driver<UIColor>?
     var weatherImageUrl: Observable<String>?
     let changeTempAction = PublishSubject<Bool>()
     
@@ -58,5 +61,23 @@ class MainViewModel: BaseViewModel {
         
         weatherImageUrl = weather
             .map({$0?.weatherImageUrl ?? ""})
+        
+        backgroundColour = weather
+            .map { weather -> UIColor in
+                guard let icon = weather?.icon else { return .peterRive }
+                
+                if icon.contains("n") {
+                    // night colour
+                    return .midnightBlue
+                } else if icon.contains("d") {
+                    if icon.contains("01") || icon.contains("02") {
+                        // day colour
+                        return .pomegranate
+                    }
+                }
+                // default colour
+                return .peterRive
+            }
+            .asDriver(onErrorJustReturn: .peterRive)
     }
 }

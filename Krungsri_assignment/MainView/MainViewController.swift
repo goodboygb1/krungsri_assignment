@@ -18,6 +18,7 @@ class MainViewController: BaseViewController {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
     @IBOutlet weak var weatherImageView: UIImageView!
+    @IBOutlet var backgroundView: UIView!
     
     var viewModel: MainViewModel?
     
@@ -73,6 +74,10 @@ class MainViewController: BaseViewController {
                 guard let self = self else { return }
                 self.weatherImageView.kf.setImage(with: URL(string: url))
         })
+            .disposed(by: disposeBag)
+        
+        viewModel?.backgroundColour?
+            .drive(backgroundView.rx.backgroundColor)
             .disposed(by: disposeBag)
     }
     

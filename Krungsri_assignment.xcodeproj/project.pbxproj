@@ -26,6 +26,7 @@
 		A37AC73928B000AE007EF09C /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37AC73828B000AE007EF09C /* Constant.swift */; };
 		A37AC73B28B00324007EF09C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37AC73A28B00324007EF09C /* BaseViewController.swift */; };
 		A37AC73D28B0032A007EF09C /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37AC73C28B0032A007EF09C /* BaseViewModel.swift */; };
+		A3C9CB6F28B0F65300E2088D /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C9CB6E28B0F65300E2088D /* UIColorExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		A37AC73828B000AE007EF09C /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		A37AC73A28B00324007EF09C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		A37AC73C28B0032A007EF09C /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		A3C9CB6E28B0F65300E2088D /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		E63C1959547504A9E9416BFF /* Pods_Krungsri_assignment.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Krungsri_assignment.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F50D41AF0E1EC17D9DF943EA /* Pods-Krungsri_assignment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Krungsri_assignment.debug.xcconfig"; path = "Target Support Files/Pods-Krungsri_assignment/Pods-Krungsri_assignment.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -179,6 +181,7 @@
 			children = (
 				A37AC73628AFFFD1007EF09C /* UIViewControllerExtension.swift */,
 				A32F88FA28B00D1B000A7EE9 /* UIViewExtension.swift */,
+				A3C9CB6E28B0F65300E2088D /* UIColorExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				A32F890028B01ABB000A7EE9 /* WeatherRepository.swift in Sources */,
 				A37AC73D28B0032A007EF09C /* BaseViewModel.swift in Sources */,
 				A32F890328B01AC7000A7EE9 /* Weather.swift in Sources */,
+				A3C9CB6F28B0F65300E2088D /* UIColorExtension.swift in Sources */,
 				A37AC73B28B00324007EF09C /* BaseViewController.swift in Sources */,
 				A37AC73428AFF716007EF09C /* MainCoordinator.swift in Sources */,
 				A37AC73228AFF689007EF09C /* BaseCoordinator.swift in Sources */,
