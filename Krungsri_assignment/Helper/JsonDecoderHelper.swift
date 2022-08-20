@@ -11,22 +11,61 @@ import SwiftyJSON
 
 protocol JsonDecoderProtocol {
     func decodeWeather(from json: JSON) -> Observable<Weather?>
+    func decodeWeathersFiveDayForcase(from json: JSON) -> Observable<[Weather]>
 }
 
 class JsonDecoderHelper: JsonDecoderProtocol {
     func decodeWeather(from json: JSON) -> Observable<Weather?> {
-        let weather = json["weather"].arrayValue.first
-        let mainData = json["main"].dictionaryValue
+        let main = json["main"].dictionaryValue
         let cityName = json["name"].stringValue
         
-        if let icon = weather?["icon"].string,
-           let temperatureInCelsuis = mainData["temp"]?.double,
-           let humidity = mainData["humidity"]?.int {
+        if let weather = json["weather"].arrayValue.first,
+           let icon = weather["icon"].string,
+           let temperature = main["temp"]?.double,
+           let humidity = main["humidity"]?.int {
+          
+            let weather = Weather(
+                cityName: cityName,
+                temperature: temperature,
+                humidity: humidity,
+                icon: icon
+            )
             
-            let weather = Weather(cityName: cityName, temperature: temperatureInCelsuis, humidity: humidity, icon: icon)
             return Observable.just(weather)
         }
         
         return Observable.just(nil)
+    }
+    
+    func decodeWeathersFiveDayForcase(from json: JSON) -> Observable<[Weather]> {
+        var weathers: [Weather] = []
+        
+        let list = json["list"].arrayValue
+        let city = json["city"].dictionaryValue
+        
+        
+        for value in list {
+            if let weather = value["weather"].arrayValue.first,
+               let main = value["main"].dictionary,
+               let icon = weather["icon"].string,
+               let temperature = main["temp"]?.double,
+               let humidity = main["humidity"]?.int,
+               let cityName = city["name"]?.string,
+               let dateTime = value["dt_txt"].string {
+                
+                let date = dateTime.components(separatedBy: " ").first
+                let time = dateTime.components(separatedBy: " ").last
+                let weather = Weather(
+                    cityName: cityName,
+                    temperature: temperature,
+                    humidity: humidity,
+                    icon: icon,
+                    date: date, time: time
+                )
+                weathers.append(weather)
+            }
+        }
+        
+        return Observable.just(weathers)
     }
 }

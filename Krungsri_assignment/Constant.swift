@@ -10,6 +10,11 @@ import Foundation
 struct Constant {
     struct StoryboardName {
         static let main = "Main"
+        static let forecaste = "Forecast"
+    }
+    
+    struct TableViewCellName {
+        static let weatherForcastCell = "weatherForcastCell"
     }
     
     static let endPointUrl = "https://api.openweathermap.org"

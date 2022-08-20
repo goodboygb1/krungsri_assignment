@@ -36,7 +36,30 @@ class MainCoordinator: BaseCoordinator {
             
             viewController.viewModel = viewModel
             
+            viewController.showForecastAction.subscribe(onNext: { [weak self] _ in
+                self?.showFiveDayForcast(
+                    with: viewModel.input.value.cityName,
+                    backgroundColour: viewController.backgroundView.backgroundColor ?? .peterRive,
+                    weatherRepository: input.weatherRepository,
+                    units: viewModel.units,
+                    jsonDecoderHelper: input.jsonDecoderHelper
+                )
+            })
+            
             navigationController.pushViewController(viewController, animated: false)
         }
+    }
+    
+    func showFiveDayForcast(with cityName: String, backgroundColour: UIColor, weatherRepository: WeatherRepository, units: Units, jsonDecoderHelper: JsonDecoderProtocol) {
+        let input = ForecastCoordinatorInput(
+            cityName: cityName,
+            backgroundColour: backgroundColour,
+            weatherRepository: weatherRepository,
+            units: units,
+            jsonDecoder: jsonDecoderHelper
+        )
+        let coordinator = ForecastCoordinator(navigationController: navigationController, window: window)
+        
+        coordinator.start(input: input)
     }
 }

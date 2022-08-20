@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         setupKeyboardManager()
+        setupNavbar()
         return true
     }
 
@@ -34,6 +35,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setupKeyboardManager() {
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+    }
+    
+    func setupNavbar() {
+        UINavigationBar.appearance().tintColor = .white
     }
 }
 

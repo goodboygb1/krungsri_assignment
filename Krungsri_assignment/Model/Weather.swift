@@ -15,4 +15,6 @@ struct Weather {
     var weatherImageUrl: String {
         return "https://openweathermap.org/img/wn/\(icon ?? "")@2x.png"
     }
+    var date: String?
+    var time: String?
 }

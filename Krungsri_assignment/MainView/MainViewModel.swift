@@ -18,7 +18,7 @@ class MainViewModel: BaseViewModel {
     let jsonDecoder: JsonDecoderProtocol
     
     // input
-    let cityName: PublishSubject<(String,Units)> = PublishSubject<(String,Units)>()
+    let input: BehaviorRelay<(cityName: String,units: Units)> = BehaviorRelay<(cityName: String,units: Units)>(value: ("",.metric))
     
     // output
     var temperature: Driver<Double>?
@@ -27,7 +27,7 @@ class MainViewModel: BaseViewModel {
     var weatherImageUrl: Observable<String>?
     let changeTempAction = PublishSubject<Bool>()
     
-    var isTempShowInCelsuis: Bool = true
+    var units: Units = .metric
     let weather = BehaviorRelay<Weather?>(value: nil)
     
     
@@ -38,7 +38,8 @@ class MainViewModel: BaseViewModel {
     }
     
     func bindObserable() {
-        let weather = cityName
+        let weather = input
+            .skip(1)
             .flatMap{ [weak self] (cityName, units) -> Observable<JSON> in
                 guard let self = self else { return Observable.empty()}
                 return self.weatherRepository.getWeather(with: cityName, units: units)
